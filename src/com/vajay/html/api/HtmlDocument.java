@@ -4,16 +4,13 @@ public class HtmlDocument {
 	private HtmlHead head;
 	private HtmlBody body;
 	private int indentSpaceCount;
-	private int indentDepth;
-
-	{
-		this.indentDepth = 0;
-	}
 
 	public HtmlDocument(int indentSpaceCount) {
 		this.indentSpaceCount = indentSpaceCount;
-		this.head = new HtmlHead(this.indentSpaceCount, this.indentDepth + 1);
-		this.body = new HtmlBody(this.indentSpaceCount, this.indentDepth + 1);
+		
+		int initialIndentDepth = 1;
+		this.head = new HtmlHead(this.indentSpaceCount, initialIndentDepth);
+		this.body = new HtmlBody(this.indentSpaceCount, initialIndentDepth);
 	}
 
 	public void addHeadElement(HtmlElement element) {
