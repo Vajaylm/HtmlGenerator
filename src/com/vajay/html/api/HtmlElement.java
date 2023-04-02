@@ -35,4 +35,12 @@ public abstract class HtmlElement {
 		this.text = text;
 	}
 
+	public void addProperty(String name, String value) {
+		if (name == null || name.isEmpty() || value == null || value.isEmpty()) {
+			return;
+		}
+
+		this.properties.put(name, value);
+	}
+
 }
