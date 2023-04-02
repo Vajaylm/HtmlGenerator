@@ -8,9 +8,8 @@ public class HtmlDocument {
 	public HtmlDocument(int indentSpaceCount) {
 		this.indentSpaceCount = indentSpaceCount;
 		
-		int initialIndentDepth = 1;
-		this.head = new HtmlHead(this.indentSpaceCount, initialIndentDepth);
-		this.body = new HtmlBody(this.indentSpaceCount, initialIndentDepth);
+		this.head = new HtmlHead(this.indentSpaceCount);
+		this.body = new HtmlBody(this.indentSpaceCount);
 	}
 
 	public void addHeadElement(HtmlElement element) {

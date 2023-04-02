@@ -2,8 +2,8 @@ package com.vajay.html.api;
 
 public class HtmlHead extends HtmlElement {
 
-	public HtmlHead(int indentSpaceCount, int indentDepth) {
-		super(indentSpaceCount, indentDepth);
+	public HtmlHead(int indentSpaceCount) {
+		super(indentSpaceCount, 1);
 	}
 
 	@Override
