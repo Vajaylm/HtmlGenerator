@@ -69,46 +69,75 @@ public abstract class HtmlElement {
 		this.indentSpaceCount = indentSpaceCount;
 	}
 
-	@Override
-	public String toString() {
+	private String indentationToString() {
 		StringBuilder builder = new StringBuilder();
+		
 		for (int i = 0; i < indentDepth * indentSpaceCount; i++) {
 			builder.append(" ");
 		}
+		
+		return builder.toString();
+	}
+	
+	private String propertiesToString() {
+		String props = "";
+		
+		if (!this.properties.entrySet().isEmpty()) {
+			StringBuilder builder = new StringBuilder();
+			
+			for (Map.Entry<String, String> property : this.properties.entrySet()) {
+				builder.append(" ");
+				builder.append(property.getKey());
+				builder.append("=\"");
+				builder.append(property.getValue());
+				builder.append("\"");
+			}
+			
+			props = builder.toString();			
+		}
+		
+		return props;
+	}
+	
+	private String childElementsToString() {
+		String childElementsString = "";
+		
+		if (this.childElements.size() > 0) {
+			StringBuilder builder = new StringBuilder();
+			
+			builder.append(System.lineSeparator());
+
+			for (HtmlElement childElement : this.childElements) {
+				// Child elements has to be adjusted to the correct indentation depth
+				childElement.setIndentDepth(this.indentDepth + 1);
+				childElement.setIndentSpaceCount(this.indentSpaceCount);
+	
+				builder.append(childElement.toString());
+			}
+
+			builder.append(indentationToString());
+			
+			childElementsString = builder.toString();
+		}
+		
+		return childElementsString;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(indentationToString());
 
 		builder.append("<");
 		builder.append(this.getTagName());
-
-		for (Map.Entry<String, String> attribute : this.properties.entrySet()) {
-			builder.append(" ");
-			builder.append(attribute.getKey());
-			builder.append("=\"");
-			builder.append(attribute.getValue());
-			builder.append("\"");
-		}
-
+		builder.append(propertiesToString());
 		builder.append(">");
 
 		if (this.text != null) {
 			builder.append(this.text);
 		}
-
-		if (this.childElements.size() > 0) {
-			builder.append(System.lineSeparator());
-		}
-
-		for (HtmlElement childElement : this.childElements) {
-			childElement.setIndentDepth(this.indentDepth + 1);
-			childElement.setIndentSpaceCount(this.indentSpaceCount);
-
-			builder.append(childElement.toString());
-		}
-
-		if (this.childElements.size() > 0) {
-			for (int i = 0; i < indentDepth * indentSpaceCount; i++) {
-				builder.append(" ");
-			}
-		}
+		
+		builder.append(childElementsToString());
 
 		builder.append("</");
 		builder.append(this.getTagName());
