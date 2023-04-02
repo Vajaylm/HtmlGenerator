@@ -42,7 +42,7 @@ public abstract class HtmlElement {
 
 		this.properties.put(name, value);
 	}
-	
+
 	public void addChildElement(HtmlElement element) {
 		if (element == null) {
 			return;
@@ -50,7 +50,7 @@ public abstract class HtmlElement {
 
 		this.childElements.add(element);
 	}
-	
+
 	public void removeChildElement(HtmlElement element) {
 		if (element == null) {
 			return;
@@ -59,4 +59,9 @@ public abstract class HtmlElement {
 		this.childElements.remove(element);
 	}
 
+	protected int getIndentDepth() {
+		return this.indentDepth;
+	}
+
+	protected abstract String getTagName();
 }
