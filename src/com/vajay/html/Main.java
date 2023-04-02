@@ -13,33 +13,33 @@ public class Main {
 
 	public static void main(String[] args) {
 		if (args.length < 2) {
-			System.out.println("A név vagy az email paraméter nem lett megadva!");
+			System.err.println(
+					"A név vagy az email paraméter nem lett megadva!\nAz első paraméter a név, a második az email cím legyen.");
 			return;
 		}
-		
+
 		String nameParam = args[0];
 		String emailParam = args[1];
 		String repositoryUrl = "https://github.com/Vajaylm/HtmlGenerator";
-		
+
 		int indentSpaceCount = 5;
-		
+
+		// Create document and components
 		HtmlDocument doc = new HtmlDocument(indentSpaceCount);
 		doc.addHeadElement(new HtmlTitle(nameParam + " - Teszt Feladat"));
-		
+
 		HtmlHeader header1 = new HtmlHeader("Teszt Feladat", 1);
 		doc.addBodyElement(header1);
-		
+
 		HtmlHeader header2 = new HtmlHeader("Nem látszó header (h2)", 2);
 		doc.addBodyElement(header2);
-		
+
 		HtmlParagraph paragraph1 = new HtmlParagraph();
 		doc.addBodyElement(paragraph1);
 		HtmlLink link1 = new HtmlLink("Megoldás");
 		link1.addProperty("href", repositoryUrl);
 		paragraph1.addChildElement(link1);
-		
-		doc.removeBodyElement(header2);
-		
+
 		HtmlParagraph paragraph2 = new HtmlParagraph("A feladat elkészítőjének adatai");
 		doc.addBodyElement(paragraph2);
 
@@ -61,8 +61,17 @@ public class Main {
 		HtmlLink link2 = new HtmlLink("L&P Solutions");
 		link2.addProperty("href", "http://lpsolutions.hu");
 		doc.addBodyElement(link2);
+
+		HtmlTable table2 = new HtmlTable();
+		HtmlTableRow row3 = new HtmlTableRow();
+		row3.addChildElement(new HtmlTableCell("Törlendő cella"));
+		table2.addChildElement(row3);
 		
+		// Remove some of the components
+		doc.removeBodyElement(header2);
 		row1.removeChildElement(cell1);
+		doc.removeBodyElement(table2);
+		
 		System.out.println(doc.toString());
 	}
 
