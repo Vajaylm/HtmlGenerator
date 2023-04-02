@@ -99,7 +99,7 @@ public abstract class HtmlElement {
 		return props;
 	}
 	
-	private String childElementsToString() {
+	protected String childElementsToString() {
 		String childElementsString = "";
 		
 		if (this.childElements.size() > 0) {

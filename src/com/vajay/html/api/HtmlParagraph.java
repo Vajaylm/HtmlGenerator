@@ -15,4 +15,20 @@ public class HtmlParagraph extends HtmlElement {
 		return "p";
 	}
 
+	@Override
+	protected String childElementsToString() {
+		String childElementsString = "";
+		
+		if (this.childElements.size() > 0) {
+			StringBuilder builder = new StringBuilder();
+			
+			for (HtmlElement childElement : this.childElements) {
+				builder.append(childElement.toString().trim());
+			}
+			
+			childElementsString = builder.toString();
+		}
+		
+		return childElementsString;
+	}
 }
