@@ -59,20 +59,16 @@ public abstract class HtmlElement {
 		this.childElements.remove(element);
 	}
 
-	protected int getIndentDepth() {
-		return this.indentDepth;
-	}
-
 	protected abstract String getTagName();
-	
+
 	protected void setIndentDepth(int indentDepth) {
 		this.indentDepth = indentDepth;
 	}
-	
+
 	protected void setIndentSpaceCount(int indentSpaceCount) {
 		this.indentSpaceCount = indentSpaceCount;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
