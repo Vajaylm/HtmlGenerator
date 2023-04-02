@@ -64,4 +64,61 @@ public abstract class HtmlElement {
 	}
 
 	protected abstract String getTagName();
+	
+	protected void setIndentDepth(int indentDepth) {
+		this.indentDepth = indentDepth;
+	}
+	
+	protected void setIndentSpaceCount(int indentSpaceCount) {
+		this.indentSpaceCount = indentSpaceCount;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < indentDepth * indentSpaceCount; i++) {
+			builder.append(" ");
+		}
+
+		builder.append("<");
+		builder.append(this.getTagName());
+
+		for (Map.Entry<String, String> attribute : this.properties.entrySet()) {
+			builder.append(" ");
+			builder.append(attribute.getKey());
+			builder.append("=\"");
+			builder.append(attribute.getValue());
+			builder.append("\"");
+		}
+
+		builder.append(">");
+
+		if (this.text != null) {
+			builder.append(this.text);
+		}
+
+		if (this.childElements.size() > 0) {
+			builder.append(System.lineSeparator());
+		}
+
+		for (HtmlElement childElement : this.childElements) {
+			childElement.setIndentDepth(this.indentDepth + 1);
+			childElement.setIndentSpaceCount(this.indentSpaceCount);
+
+			builder.append(childElement.toString());
+		}
+
+		if (this.childElements.size() > 0) {
+			for (int i = 0; i < indentDepth * indentSpaceCount; i++) {
+				builder.append(" ");
+			}
+		}
+
+		builder.append("</");
+		builder.append(this.getTagName());
+		builder.append(">");
+		builder.append(System.lineSeparator());
+
+		return builder.toString();
+	}
 }
