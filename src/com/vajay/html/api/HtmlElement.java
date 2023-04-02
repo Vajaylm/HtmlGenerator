@@ -1,5 +1,6 @@
 package com.vajay.html.api;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public abstract class HtmlElement {
 
 	public void addProperty(String name, String value) {
 		if (name == null || name.isEmpty() || value == null || value.isEmpty()) {
-			return;
+			throw new InvalidParameterException("Tulajdonság hozzáadáshoz meg kell adni a név és érték paramétert is!");
 		}
 
 		this.properties.put(name, value);
