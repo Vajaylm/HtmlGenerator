@@ -42,5 +42,21 @@ public abstract class HtmlElement {
 
 		this.properties.put(name, value);
 	}
+	
+	public void addChildElement(HtmlElement element) {
+		if (element == null) {
+			return;
+		}
+
+		this.childElements.add(element);
+	}
+	
+	public void removeChildElement(HtmlElement element) {
+		if (element == null) {
+			return;
+		}
+
+		this.childElements.remove(element);
+	}
 
 }
